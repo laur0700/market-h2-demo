@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Table(name = "users")
 @Data
 @NoArgsConstructor
-public class User {
+public class User implements Comparable<User>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -22,4 +22,9 @@ public class User {
 
     @OneToOne(cascade = CascadeType.ALL)
     private Wishlist wishlist;
+
+    @Override
+    public int compareTo(User o) {
+        return this.orderHistory - o.getOrderHistory();
+    }
 }

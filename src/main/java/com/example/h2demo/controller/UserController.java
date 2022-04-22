@@ -13,14 +13,36 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    @PostMapping("order/id/{id}")
+    public String order(@PathVariable Integer id){
+        userService.sendOrder(id);
+
+        return "Order received";
+    }
+
     @PostMapping("add-product-cart/user-id/{userId}/product-id/{productId}/quantity/{quantity}")
-    public void addProductToCart(@PathVariable Integer userId,@PathVariable Integer productId,@PathVariable Integer quantity){
+    public void addProductsToCart(@PathVariable Integer userId, @PathVariable Integer productId, @PathVariable Integer quantity){
         userService.addProductsToCart(userId, productId, quantity);
     }
 
     @PostMapping("remove-product-cart/user-id/{userId}/product-id/{productId}/quantity/{quantity}")
-    public void removeProductFromCart(@PathVariable Integer userId,@PathVariable Integer productId,@PathVariable Integer quantity){
+    public void removeProductsFromCart(@PathVariable Integer userId, @PathVariable Integer productId, @PathVariable Integer quantity){
         userService.removeProductsFromCart(userId, productId, quantity);
+    }
+
+    @PostMapping("add-product-wishlist/user-id/{userId}/product-id/{productId}")
+    public void addProductsToWishlist(@PathVariable Integer userId, @PathVariable Integer productId){
+        userService.addProductsToWishlist(userId, productId);
+    }
+
+    @PostMapping("remove-product-wishlist/user-id/{userId}/product-id/{productId}")
+    public void removeProductsFromWishlist(@PathVariable Integer userId, @PathVariable Integer productId){
+        userService.removeProductsFromWishlist(userId, productId);
+    }
+
+    @GetMapping("get/all-sorted")
+    public List<User> getAllSorted(){
+        return userService.getAllSorted();
     }
 
     @GetMapping("get/all")

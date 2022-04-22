@@ -11,7 +11,7 @@ import java.util.List;
 @Table(name = "carts")
 @Data
 @NoArgsConstructor
-public class Cart {
+public class Cart implements Comparable<Cart>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -23,4 +23,9 @@ public class Cart {
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<OrderedProduct> products;
+
+    @Override
+    public int compareTo(Cart o) {
+        return this.quantityOfProducts - o.getQuantityOfProducts();
+    }
 }

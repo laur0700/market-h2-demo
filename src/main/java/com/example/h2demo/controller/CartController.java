@@ -13,6 +13,11 @@ public class CartController {
     @Autowired
     CartService cartService;
 
+    @GetMapping("get/all-sorted")
+    public List<Cart> getAllSorted(){
+        return cartService.getAllSorted();
+    }
+
     @GetMapping("get/all")
     public List<Cart> getAll(){
         return cartService.getAll();

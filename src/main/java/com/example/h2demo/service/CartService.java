@@ -5,6 +5,7 @@ import com.example.h2demo.repository.CartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,6 +13,12 @@ import java.util.Optional;
 public class CartService {
     @Autowired
     CartRepository cartRepository;
+
+    public List<Cart> getAllSorted(){
+        List<Cart> carts = cartRepository.findAll();
+        carts.sort(Collections.reverseOrder());
+        return carts;
+    }
 
     public List<Cart> getAll(){
         return cartRepository.findAll();
