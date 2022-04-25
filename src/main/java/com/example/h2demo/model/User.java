@@ -15,6 +15,8 @@ public class User implements Comparable<User>{
     private Integer id;
     private String firstName;
     private String lastName;
+    private String username;
+    private String password;
     private Integer orderHistory;
 
     @OneToOne(cascade = CascadeType.ALL)
